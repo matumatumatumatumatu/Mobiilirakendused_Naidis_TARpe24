@@ -4,10 +4,11 @@
              x:Class="Naidis_TARpe24.Timer_Page"
              Title="Timer_Page">
     <VerticalStackLayout>
-        <Label x:Name="lbl">
-            Text="Vajuta nupule ja siia"
-               FontSize="Medium"
-               BackgroundColor="Beige"
+        <Label x:Name="lbl" 
+               Text="Vajuta nupule ja siia"
+   FontSize="Medium"
+   BackgroundColor="Beige">
+            
                 <Label.GestureRecognizers>
             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
             </Label.GestureRecognizers>

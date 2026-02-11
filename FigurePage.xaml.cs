@@ -11,6 +11,9 @@ public partial class FigurePage : ContentPage
 	HorizontalStackLayout hsl;
 	List<string> nupud = new List<string> { "Tagasi", "Avaleht", "Edasi" };
 	VerticalStackLayout vsl;
+	Point A;
+	Point B;
+	Point C;
 
 	public FigurePage()
 	{
@@ -52,15 +55,24 @@ public partial class FigurePage : ContentPage
 			HorizontalOptions = LayoutOptions.Center
 		};
 		pall.GestureRecognizers.Add(tap);
+		A = new Point(0, 200);
+
+		B = new Point(100, 0);
+
+		C = new Point(200, 200);
+
 		kolmnurk = new Polygon
 		{
 			Points = new PointCollection
 			{
-				new Point(0,200),
-				new Point(100,0),
-				new Point(200,200)
+			A,
+			B,
+			C
 			},
-			Fill = new SolidColorBrush(Color.FromRgb(g,b,r)),
+
+
+
+			Fill = new SolidColorBrush(Color.FromRgb(g, b, r)),
 			Stroke = Colors.Aquamarine,
 			StrokeThickness = 5,
 			HorizontalOptions = LayoutOptions.Center,
@@ -74,14 +86,14 @@ public partial class FigurePage : ContentPage
             int r = rnd.Next(256);
             int g = rnd.Next(256);
             int b = rnd.Next(256);
-            kolmnurk.BackgroundColor = Color.FromRgb(r, g, b);
-            kolmnurk.WidthRequest = kolmnurk.Width + 20;
-            kolmnurk.HeightRequest = kolmnurk.Height + 30;
-            if (kolmnurk.WidthRequest > (int)DeviceDisplay.MainDisplayInfo.Width / 3)
-            {
-                kolmnurk.WidthRequest = 200;
-                kolmnurk.HeightRequest = 200;
-            }
+            kolmnurk.Fill = Color.FromRgb(r, g, b);
+			kolmnurk.Points = new PointCollection
+			{
+                new Point(0, r),
+                new Point(g, 0),
+                new Point(g, b)
+            };
+
         };
 		hsl = new HorizontalStackLayout { Spacing = 20, HorizontalOptions = LayoutOptions.Center };
 		for(int j = 0; j < nupud.Count; j++)
