@@ -123,8 +123,8 @@ public partial class LumememmPage : ContentPage
     }
     private void Kiirus(object? sender, ValueChangedEventArgs e)
     {
-        kiirus.Value = sulamisKiirus;
-        sulamisKiirusLabel.Text ="Sulamis kiirus: "+ Convert.ToString(sulamisKiirus);
+        sulamisKiirus = (uint)e.NewValue;
+        sulamisKiirusLabel.Text = "Sulamis kiirus: " + sulamisKiirus;
     }
 
     private async void Tegevus(object? sender, EventArgs e)
@@ -185,10 +185,10 @@ public partial class LumememmPage : ContentPage
         }
     private void Heledus(object? sender, ValueChangedEventArgs e)
     {
-        double heledus2 = heledus.Value / 100;
-        
-        heledus2 = pall1.Opacity;
-        heledus2 = pall2.Opacity;
-        heledus2 = pall3.Opacity;
+        double heledus2 = e.NewValue / 100;
+
+        pall1.Opacity = heledus2;
+        pall2.Opacity = heledus2;
+        pall3.Opacity = heledus2;
     }
-    }
+}

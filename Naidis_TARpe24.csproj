@@ -73,6 +73,9 @@
 	  <MauiXaml Update="LumememmPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pop_Up_Page.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SliderRgbPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
