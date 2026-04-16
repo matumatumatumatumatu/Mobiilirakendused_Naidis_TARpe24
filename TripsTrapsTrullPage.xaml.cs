@@ -3,15 +3,22 @@ namespace Naidis_TARpe24;
 public partial class TripsTrapsTrullPage : ContentPage
 {
 	Grid gr3x3;
-	Image img;
+	Image Ofire;
+    Image Xfire;
 	int player;
     Switch s_pilt;
+    VerticalStackLayout vsl;
 
 	public TripsTrapsTrullPage()
 	{
-        img = new Image
+        Ofire = new Image
         {
-            Source = "dotnet_bot.png",
+            Source = "Ofire.jpg",
+            HorizontalOptions = LayoutOptions.Center
+        };
+        Xfire = new Image
+        {
+            Source = "Xfire.jpg",
             HorizontalOptions = LayoutOptions.Center
         };
         s_pilt = new Switch
@@ -36,5 +43,29 @@ public partial class TripsTrapsTrullPage : ContentPage
             gr3x3.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             gr3x3.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
         }
+        Button alusta = new Button
+        {
+            Text="Alusta mäng"
+        };
+        alusta.Clicked += Alusta_Clicked;
+
+
+        Content = vsl;
+
+        Content = new VerticalStackLayout
+        {
+            Children = {alusta, gr3x3}
+        };
+
+
+
+        
+    }
+
+    private void Alusta_Clicked(object? sender, EventArgs e)
+    {
+        int Moves;
+        gr3x3.Children.Clear();
+        Moves = 0;
     }
 }
