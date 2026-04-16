@@ -13,12 +13,12 @@ public partial class TripsTrapsTrullPage : ContentPage
 	{
         Ofire = new Image
         {
-            Source = "Ofire.jpg",
+            Source = "xfire.jpg",
             HorizontalOptions = LayoutOptions.Center
         };
         Xfire = new Image
         {
-            Source = "Xfire.jpg",
+            Source = "xfire.jpg",
             HorizontalOptions = LayoutOptions.Center
         };
         s_pilt = new Switch
