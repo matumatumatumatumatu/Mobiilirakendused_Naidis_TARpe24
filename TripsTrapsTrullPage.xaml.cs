@@ -2,15 +2,15 @@ namespace Naidis_TARpe24;
 
 public partial class TripsTrapsTrullPage : ContentPage
 {
-	Grid gr3x3;
-	Image Ofire;
+    Grid gr3x3;
+    Image Ofire;
     Image Xfire;
-	int player;
+    int player;
     Switch s_pilt;
     VerticalStackLayout vsl;
 
-	public TripsTrapsTrullPage()
-	{
+    public TripsTrapsTrullPage()
+    {
         Ofire = new Image
         {
             Source = "xfire.jpg",
@@ -45,7 +45,7 @@ public partial class TripsTrapsTrullPage : ContentPage
         }
         Button alusta = new Button
         {
-            Text="Alusta mäng"
+            Text = "Alusta mäng"
         };
         alusta.Clicked += Alusta_Clicked;
 
@@ -54,12 +54,12 @@ public partial class TripsTrapsTrullPage : ContentPage
 
         Content = new VerticalStackLayout
         {
-            Children = {alusta, gr3x3}
+            Children = { alusta, gr3x3 }
         };
 
 
 
-        
+
     }
 
     private void Alusta_Clicked(object? sender, EventArgs e)
@@ -67,5 +67,42 @@ public partial class TripsTrapsTrullPage : ContentPage
         int Moves;
         gr3x3.Children.Clear();
         Moves = 0;
+        for (int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 3; col++)
+            {
+                var button = new Button
+                {
+                    Text = "",
+                    BackgroundColor = Colors.White,
+                    BorderColor = Colors.Black,
+                    BorderWidth = 1,
+                    CornerRadius = 0,
+                    FontSize = 32
+                };
+
+                 button.Clicked += Button_Clicked;
+
+                gr3x3.Add(button, col, row);
+            }
+        }
+    }
+    private void Button_Clicked(object? sender, EventArgs e)
+    {
+        var button = (Button)sender;
+
+        if (button.ImageSource != null) return;
+
+        if (player == 0)
+        {
+            button.ImageSource = "xfire.jpg";
+            player = 1;
+        }
+        else
+        {
+            button.ImageSource = "ofire.png";
+            player = 0;
+        }
+
     }
 }
