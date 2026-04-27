@@ -52,4 +52,5 @@ public partial class Table_Page : ContentPage
 			sc.Text = "Näita veel";
 		}
 	}
-	}
+
+}
