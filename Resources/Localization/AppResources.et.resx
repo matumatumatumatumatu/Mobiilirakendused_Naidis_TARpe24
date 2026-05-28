@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<data name="CarbTitle" xml:space="preserve"><value>Pasta Carbonara</value></data>
+	<data name="CarbDesc" xml:space="preserve"><value>Klassikaline Rooma pastaroog</value></data>
+	<data name="CarbRecipe" xml:space="preserve"><value>Makaronid, soolapeekon, oliiviõli, muna, riivjuust, sool ja pipar</value></data>
+
+	<data name="PizzaTitle" xml:space="preserve"><value>Pizza Margherita</value></data>
+	<data name="PizzaDesc" xml:space="preserve"><value>Lihtne ja maitsev</value></data>
+	<data name="PizzaRecipe" xml:space="preserve"><value>Pitsapõhi, tomatikaste, mozarella juust, parmesani juust, oliiviõli, basiilik</value></data>
+
+	<data name="TirTitle" xml:space="preserve"><value>Tiramisu</value></data>
+	<data name="TirDesc" xml:space="preserve"><value>Populaarne kohvimaitseline magustoit</value></data>
+	<data name="TirRecipe" xml:space="preserve"><value>Küpsised, mandliliköör, kohvi, munakollased, suhkur, toorjuust, koor, vanillisuhkur, kakaopulber</value></data>
+
+	<data name="RisTitle" xml:space="preserve"><value>Risotto alla Milanese</value></data>
+	<data name="RisDesc" xml:space="preserve"><value>Kreemine safraniriis</value></data>
+	<data name="RisRecipe" xml:space="preserve"><value>Riis, või, safraniniidikesed, sibul, luuüdi, valge vein, puljong, parmesan, sool ja pipar</value></data>
+
+	<data name="LasTitle" xml:space="preserve"><value>Lasagne</value></data>
+	<data name="LasDesc" xml:space="preserve"><value>Kihiline pasta liha ja juustuga</value></data>
+	<data name="LasRecipe" xml:space="preserve"><value>Sibul, petersell, hakkliha, porgand, tomatipasta, purustatud tomatid, vesi, pune, või, nisujahu, piim, juust, lasanjeplaadid</value></data>
+
+	<data name="SwitchLang" xml:space="preserve"><value>Vaheta inglise keelele</value></data>
+</root>
