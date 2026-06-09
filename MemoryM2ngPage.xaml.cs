@@ -1,185 +1,199 @@
+using Naidis_TARpe24.Models.Memory;
+using Naidis_TARpe24.ViewModels;
 
-namespace Naidis_TARpe24;
-
-public partial class MemoryM2ngPage : ContentPage
+namespace Naidis_TARpe24
 {
-    Grid gr4x4;
-    Image xFire;
-    Image yFire;
-    Image questionFire;
-    Image qFire;
-    Image oFire;
-    Image gFire;
-    Image fFire;
-    Image cFire;
-    Button firstButton = null;
-    int firstValue = -1;
-    bool timerRunning = false;
-    Button secondButton = null;
-    int[,] board = new int[4, 4];
-    string[] imageMap = new string[]
-{
-    "",
-    "xfire.jpg",
-    "yfire.jpg",
-    "questionfire.jpg",
-    "qfire.jpg",
-    "ofire.jpg",
-    "gfire.jpg",
-    "ffire.jpg",
-    "cfire.jpg"
-};
-    VerticalStackLayout vsl;
-
-    public MemoryM2ngPage()
+    public partial class MemoryM2ngPage : ContentPage
     {
-        xFire = new Image { Source = "xfire.jpg", HorizontalOptions = LayoutOptions.Center };
-        yFire = new Image { Source = "yfire.jpg", HorizontalOptions = LayoutOptions.Center };
-        questionFire = new Image { Source = "questionfire.jpg", HorizontalOptions = LayoutOptions.Center };
-        qFire = new Image { Source = "qfire.jpg", HorizontalOptions = LayoutOptions.Center };
-        oFire = new Image { Source = "ofire.jpg", HorizontalOptions = LayoutOptions.Center };
-        gFire = new Image { Source = "gfire.jpg", HorizontalOptions = LayoutOptions.Center };
-        fFire = new Image { Source = "ffire.jpg", HorizontalOptions = LayoutOptions.Center };
-        cFire = new Image { Source = "cfire.jpg", HorizontalOptions = LayoutOptions.Center };
+        private readonly GameViewModel _vm;
 
+        private Grid _grid;
+        private Label _timerLabel;
+        private Label _statusLabel;
+        private Button _startBtn;
+        private Picker _themePicker;
 
-
-        gr4x4 = new Grid
+        public MemoryM2ngPage()
         {
-            Padding = 10,
-            ColumnSpacing = 8,
-            RowSpacing = 8,
-            VerticalOptions = LayoutOptions.Center,
-            HorizontalOptions = LayoutOptions.Center,
-            WidthRequest = 350,
-            HeightRequest = 350
-        };
+            _vm = new GameViewModel();
 
-        for (int i = 0; i < 4; i++)
-        {
-            gr4x4.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            gr4x4.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+            BindingContext = _vm;
+
+            _vm.PropertyChanged += Vm_PropertyChanged;
+
+            BuildUI();
+
+            ApplyTheme(_vm.CurrentTheme);
         }
 
-        Button alusta = new Button
+        private void Vm_PropertyChanged(object sender,
+            System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Text = "Alusta mäng"
-        };
-        alusta.Clicked += Alusta_Clicked;
-
-        Content = new VerticalStackLayout
-        {
-            Children = { alusta, gr4x4 }
-        };
-
-
-    }
-    private void Alusta_Clicked(object? sender, EventArgs e)
-    {
-        gr4x4.Children.Clear();
-
-        board = new int[4, 4];
-        GenerateBoard();
-
-        for (int row = 0; row < 4; row++)
-        {
-            for (int col = 0; col < 4; col++)
+            if (e.PropertyName == nameof(GameViewModel.CurrentTheme))
             {
-                var button = new Button
-                {
-                    Text = "",
-                    BackgroundColor = Colors.Black,
-                    BorderColor = Colors.White,
-                    BorderWidth = 1,
-                    CornerRadius = 0,
-                    FontSize = 32
-                };
+                ApplyTheme(_vm.CurrentTheme);
+            }
+        }
 
+        private void BuildUI()
+        {
+            _themePicker = new Picker
+            {
+                ItemsSource = _vm.Themes,
+                ItemDisplayBinding = new Binding("Name")
+            };
 
-                button.BindingContext = new Tuple<int, int>(row, col);
-                if( timerRunning == false)
+            _themePicker.SelectedIndex = 0;
+
+            _themePicker.SelectedIndexChanged += (_, _) =>
+            {
+                if (_themePicker.SelectedItem is Theme theme)
                 {
-                    button.Clicked += Button_Clicked;
+                    _vm.CurrentTheme = theme;
                 }
-                else if(timerRunning == true)
+            };
+
+            _timerLabel = new Label
+            {
+                FontSize = 20
+            };
+
+            _timerLabel.SetBinding(
+                Label.TextProperty,
+                nameof(GameViewModel.Elapsed));
+
+            _statusLabel = new Label
+            {
+                HorizontalTextAlignment = TextAlignment.Center
+            };
+
+            _statusLabel.SetBinding(
+                Label.TextProperty,
+                nameof(GameViewModel.Status));
+
+            _startBtn = new Button
+            {
+                Text = "Alusta mäng"
+            };
+
+            _startBtn.Clicked += OnAlustaClicked;
+
+            _grid = new Grid
+            {
+                ColumnSpacing = 8,
+                RowSpacing = 8,
+                WidthRequest = 350,
+                HeightRequest = 350,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            for (int i = 0; i < 4; i++)
+            {
+                _grid.RowDefinitions.Add(
+                    new RowDefinition
+                    {
+                        Height = GridLength.Star
+                    });
+
+                _grid.ColumnDefinitions.Add(
+                    new ColumnDefinition
+                    {
+                        Width = GridLength.Star
+                    });
+            }
+
+            Content = new VerticalStackLayout
+            {
+                Padding = 16,
+                Spacing = 10,
+                Children =
                 {
-
+                    _themePicker,
+                    _timerLabel,
+                    _statusLabel,
+                    _startBtn,
+                    _grid
                 }
-
-                    gr4x4.Add(button, col, row);
-            }
-
-
+            };
         }
-    }
 
-    private async void Button_Clicked(object? sender, EventArgs e)
-    {
-        var button = (Button)sender;
-        var pos = (Tuple<int, int>)button.BindingContext;
-        int row = pos.Item1;
-        int col = pos.Item2;
-
-        int value = board[row, col];
-        button.ImageSource = ImageSource.FromFile(imageMap[value]);
-
-        if (firstButton == null)
+        private void ApplyTheme(Theme theme)
         {
-            
-            firstButton = button;
-            firstValue = value;
-        }
-        else
-        {
-            
-            if (firstValue == value)
+            BackgroundColor = theme.BackgroundColor;
+
+            _timerLabel.TextColor = theme.TextColor;
+            _statusLabel.TextColor = theme.TextColor;
+
+            _startBtn.BackgroundColor = theme.AccentColor;
+            _startBtn.TextColor = theme.TextColor;
+
+            _themePicker.BackgroundColor = theme.BackgroundColor;
+            _themePicker.TextColor = theme.TextColor;
+
+            foreach (var child in _grid.Children)
             {
-
-                firstButton = null;
-                secondButton = null;
-
+                if (child is Button btn)
+                {
+                    btn.BorderColor = theme.CardBorderColor;
+                }
             }
-            else
+        }
+
+        private void OnAlustaClicked(object sender, EventArgs e)
+        {
+            _vm.StartGame();
+
+            RebuildGrid();
+
+            ApplyTheme(_vm.CurrentTheme);
+        }
+
+        private void RebuildGrid()
+        {
+            _grid.Children.Clear();
+
+            for (int row = 0; row < 4; row++)
             {
-                secondButton = button;
-                timerRunning = true;
-                Timer();
-                
+                for (int col = 0; col < 4; col++)
+                {
+                    var btn = new Button
+                    {
+                        BackgroundColor =
+                            _vm.CurrentTheme.BackgroundColor,
+
+                        BorderColor =
+                            _vm.CurrentTheme.CardBorderColor,
+
+                        BorderWidth = 1,
+                        CornerRadius = 0
+                    };
+
+                    btn.BindingContext = (row, col);
+
+                    btn.Clicked += OnCardClicked;
+
+                    _grid.Add(btn, col, row);
+                }
             }
         }
 
-    }
-
-    private void GenerateBoard()
-    {
-        var values = new List<int>();
-        for (int v = 1; v <= 8; v++)
+        private async void OnCardClicked(object sender, EventArgs e)
         {
-            values.Add(v);
-            values.Add(v);
-        }
+            var btn = (Button)sender;
 
-        var rng = new Random();
-        for (int i = values.Count - 1; i > 0; i--)
-        {
-            int j = rng.Next(i + 1);
-            (values[i], values[j]) = (values[j], values[i]);
-        }
+            var (row, col) =
+                ((int, int))btn.BindingContext;
 
-        for (int row = 0; row < 4; row++)
-            for (int col = 0; col < 4; col++)
-                board[row, col] = values[row * 4 + col];
-    }
-    private async void Timer()
-    {
-         Device.StartTimer(TimeSpan.FromSeconds(1), () => {
-            secondButton.ImageSource = "";
-            firstButton.ImageSource = "";
-            firstButton = null;
-            secondButton = null;
-            firstValue = -1;
-             timerRunning = false;
-            return false;
-        });
+            await _vm.FlipCard(btn, row, col);
+
+            if (_vm.IsFinished)
+            {
+                await DisplayAlert(
+                    "Mäng lõppes!",
+                    $"Aeg: {_vm.Elapsed}\nKäigud: {_vm.Moves}",
+                    "OK");
+            }
+        }
     }
 }

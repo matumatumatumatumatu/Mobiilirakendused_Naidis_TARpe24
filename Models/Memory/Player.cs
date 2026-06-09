@@ -6,11 +6,15 @@ namespace Naidis_TARpe24.Models.Memory
 {
     public class Player
     {
-       public string Name { get; set; }
-        public DateTime GameStarted { get; set; }
-        public DateTime GameEnded { get; set; }
-        public DateTime GameTime { get; set; }
-        public DateTime BestTime { get; set; }
+        public string Name { get; set; }
+        public int Moves { get; set; }
+        public int MatchedPairs { get; set; }
+        public TimeSpan ElapsedTime { get; set; }
+        public TimeSpan BestTime { get; set; }
 
+        public Player(string name)
+        {
+            Name = name;
+        }
     }
 }
