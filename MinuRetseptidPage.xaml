@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Naidis_TARpe24.MinuRetseptidPage"
+             Title="Minu retseptid"
+             BackgroundColor="#FFF8F0">
+
+    <Grid RowDefinitions="Auto, *">
+
+        <Label Grid.Row="0"
+               Text="Minu retseptid"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="#2C2C2C"
+               HorizontalOptions="Center"
+               Margin="0,20,0,8" />
+
+        <ListView Grid.Row="1"
+                  x:Name="RetseptidListView"
+                  IsGroupingEnabled="True"
+                  HasUnevenRows="True"
+                  SeparatorColor="#EDE0D4"
+                  BackgroundColor="Transparent">
+
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid BackgroundColor="#E8652A" Padding="16,10">
+                            <Label Text="{Binding Nimetus}"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Margin="10,5"
+                               Padding="0"
+                               CornerRadius="14"
+                               HasShadow="True"
+                               BackgroundColor="White"
+                               BorderColor="#F0E8DF">
+                            <Grid ColumnDefinitions="90, *" Padding="6">
+                                <Frame Grid.Column="0"
+                                       CornerRadius="10"
+                                       Padding="0"
+                                       IsClippedToBounds="True"
+                                       HasShadow="False"
+                                       WidthRequest="78"
+                                       HeightRequest="78">
+                                    <Image Source="{Binding PildiLink}"
+                                           WidthRequest="78"
+                                           HeightRequest="78"
+                                           Aspect="AspectFill" />
+                                </Frame>
+                                <VerticalStackLayout Grid.Column="1"
+                                                     VerticalOptions="Center"
+                                                     Spacing="4"
+                                                     Padding="10,0">
+                                    <Label Text="{Binding Nimi}"
+                                           FontAttributes="Bold"
+                                           FontSize="16"
+                                           TextColor="#2C2C2C" />
+                                    <Label Text="{Binding Kategooria}"
+                                           FontSize="13"
+                                           TextColor="#999999" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        <Button
+            Text="Uus retsept"
+                x:Name="navigateButton"
+                Clicked="Nupp_Clicked"
+                BackgroundColor="OrangeRed"
+                TextColor="White"
+                />
+
+    </Grid>
+    
+
+</ContentPage>

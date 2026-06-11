@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Naidis_TARpe24.UusRetseptPage"
+             Title="Uus retsept"
+             BackgroundColor="#FFF8F0">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+
+            <Label Text="Lisa uus retsept"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="DarkGray"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,10"/>
+
+            <Label Text="Retsepti nimi" FontSize="14" TextColor="Gray" />
+            <Entry x:Name="NimiEntry"
+                   Placeholder=""
+                   FontSize="15" />
+
+            <Label Text="Kategooria" FontSize="14" TextColor="LightGray" />
+            <Entry x:Name="KategooriaEntry"
+                   Placeholder=""
+                   FontSize="15" />
+
+            <Label Text="Pildi veebiaadress (URL)" FontSize="14" TextColor="LightGray" />
+            <Entry x:Name="PildiLinkEntry"
+                   Placeholder=""
+                   FontSize="15"
+                   Keyboard="Url" />
+
+            <Button Text="Salvesta retsept"
+                    x:Name="SalvestaBtn"
+                    Clicked="SalvestaBtn_Clicked"
+                    BackgroundColor="OrangeRed"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="14"
+                    HeightRequest="52"
+                    Margin="0,12,0,0" />
+
+            <Button
+            Text="Minu retseptid"
+                x:Name="navigateButton"
+                Clicked="Nupp_Clicked"
+                BackgroundColor="OrangeRed"
+                TextColor="White"
+                />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
