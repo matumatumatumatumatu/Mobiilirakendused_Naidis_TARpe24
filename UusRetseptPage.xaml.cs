@@ -38,7 +38,7 @@ public partial class UusRetseptPage : ContentPage
 
         RetseptFileService.SalvestaRetsept(uusRetsept);
 
-        // Tühjendame kõik tekstikastid
+        
         NimiEntry.Text = string.Empty;
         KategooriaEntry.Text = string.Empty;
         PildiLinkEntry.Text = string.Empty;
